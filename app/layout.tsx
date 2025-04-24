@@ -37,27 +37,27 @@ export default function RootLayout({
             <nav className="mt-6 w-full">
               <ul className="flex flex-wrap justify-center gap-4 sm:gap-8 text-base sm:text-lg">
                 <li>
-                  <Link href="/#harjoitusajat" className="text-slate-800 dark:text-slate-200 hover:text-[#379fdc] transition-colors font-medium">
+                  <Link href="/#harjoitusajat" className="text-slate-800 hover:text-[#379fdc] transition-colors font-medium">
                     Harjoitusajat
                   </Link>
                 </li>
                 <li>
-                  <Link href="/junnutoiminta" className="text-slate-800 dark:text-slate-200 hover:text-[#379fdc] transition-colors font-medium">
+                  <Link href="/junnutoiminta" className="text-slate-800 hover:text-[#379fdc] transition-colors font-medium">
                     Junnutoiminta
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#hinnasto" className="text-slate-800 dark:text-slate-200 hover:text-[#379fdc] transition-colors font-medium">
+                  <Link href="/#hinnasto" className="text-slate-800 hover:text-[#379fdc] transition-colors font-medium">
                     Hinnasto
                   </Link>
                 </li>
                 <li>
-                  <Link href="/kertamaksut" className="text-slate-800 dark:text-slate-200 hover:text-[#379fdc] transition-colors font-medium">
+                  <Link href="/kertamaksut" className="text-slate-800 hover:text-[#379fdc] transition-colors font-medium">
                     Kertamaksut
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#yhteystiedot" className="text-slate-800 dark:text-slate-200 hover:text-[#379fdc] transition-colors font-medium">
+                  <Link href="/#yhteystiedot" className="text-slate-800 hover:text-[#379fdc] transition-colors font-medium">
                     Yhteystiedot
                   </Link>
                 </li>
