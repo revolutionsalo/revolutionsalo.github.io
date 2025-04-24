@@ -1,7 +1,8 @@
 import { Clock, MapPin, Mail, Phone, Facebook, Instagram } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CopyButton } from "@/components/ui/copy-button"
-import scheduleData from "./data/schedule.json"
+import scheduleData from "./schedule.json"
+import Link from "next/link"
 
 export default function Home() {
   return (
@@ -253,6 +254,11 @@ export default function Home() {
                 <p className="text-slate-600">
                   Treenit 2x viikossa, koko kauden ajan (kevät/syksy)
                 </p>
+                <div className="mt-4 pt-4 border-t border-slate-200">
+                  <Link href="/junnutoiminta" className="text-[#379fdc] hover:underline flex items-center">
+                    Lue lisää junnutoiminnasta →
+                  </Link>
+                </div>
               </CardContent>
             </Card>
           </div>

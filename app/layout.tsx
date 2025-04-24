@@ -42,6 +42,11 @@ export default function RootLayout({
                   </Link>
                 </li>
                 <li>
+                  <Link href="/junnutoiminta" className="text-slate-800 dark:text-slate-200 hover:text-[#379fdc] transition-colors font-medium">
+                    Junnutoiminta
+                  </Link>
+                </li>
+                <li>
                   <Link href="/#hinnasto" className="text-slate-800 dark:text-slate-200 hover:text-[#379fdc] transition-colors font-medium">
                     Hinnasto
                   </Link>

@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { CopyButton } from "@/components/ui/copy-button"
 
 export default function KertamaksutPage() {
   return (
@@ -20,12 +21,18 @@ export default function KertamaksutPage() {
               className="mx-auto"
             />
           </div>
-          
+          <p className="mt-4 mb-2">
+            Tai käytä koodia:
+          </p>
+          <div className="flex items-center justify-center mt-2 mb-6">
+            <span className="font-semibold text-[#379fdc] text-xl">4099VA</span>
+            <CopyButton text="4099VA" label="MobilePay code" />
+          </div>
           <p className="mt-8 text-slate-600">
             Kertamaksu: <span className="font-semibold text-[#379fdc]">9€</span>
           </p>
           <p className="mt-2 text-slate-600">
-            Ota kuitti tai kuvakaappaus maksusta ja näytä se kassalla.
+            Ota kuitti tai kuvakaappaus maksusta ja näytä se ohjaajalle.
           </p>
         </div>
       </div>
