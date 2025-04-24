@@ -1,0 +1,63 @@
+[
+  {
+    "day": "Maanantai",
+    "classes": [
+      {
+        "time": "17:00 - 18:00",
+        "name": "Junnu BJJ"
+      },
+      {
+        "time": "18:00 - 18:30",
+        "name": "Vapaaottelu/Lukkopaini"
+      }
+    ]
+  },
+  {
+    "day": "Tiistai",
+    "classes": [
+      {
+        "time": "09:00 - 10:00",
+        "name": "BJJ / Lukkopaini"
+      },
+      {
+        "time": "18:00 - 19:30",
+        "name": "Krav Maga"
+      }
+    ]
+  },
+  {
+    "day": "Keskiviikko",
+    "classes": [
+      {
+        "time": "18:00 - 19:30",
+        "name": "BJJ"
+      },
+      {
+        "time": "19:30 - 20:30",
+        "name": "Kunto Potkunyrkkeily"
+      }
+    ]
+  },
+  {
+    "day": "Torstai",
+    "classes": [
+      {
+        "time": "18:00 - 19:30",
+        "name": "Vapaaottelu"
+      }
+    ]
+  },
+  {
+    "day": "Perjantai",
+    "classes": [
+      {
+        "time": "17:00 - 18:00",
+        "name": "Junnu BJJ"
+      },
+      {
+        "time": "18:00 - 19:30",
+        "name": "BJJ"
+      }
+    ]
+  }
+] 
