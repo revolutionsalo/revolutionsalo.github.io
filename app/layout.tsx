@@ -18,11 +18,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fi">
+    <html lang="fi" className="light">
       <body className={inter.className}>
         <div className="flex min-h-screen flex-col">
           <header className="container mx-auto py-6 px-4 flex flex-col items-center">
-            <div className="w-full max-w-[40%]">
+            <div className="w-full sm:max-w-[40%] max-w-[80%]">
               <Link href="/">
                 <Image
                   src="/logo-clean.jpg"
@@ -34,25 +34,25 @@ export default function RootLayout({
                 />
               </Link>
             </div>
-            <nav className="mt-6">
-              <ul className="flex flex-wrap justify-center gap-8 text-lg">
+            <nav className="mt-6 w-full">
+              <ul className="flex flex-wrap justify-center gap-4 sm:gap-8 text-base sm:text-lg">
                 <li>
-                  <Link href="/#harjoitusajat" className="text-slate-800 hover:text-[#379fdc] transition-colors">
+                  <Link href="/#harjoitusajat" className="text-slate-800 dark:text-slate-200 hover:text-[#379fdc] transition-colors font-medium">
                     Harjoitusajat
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#hinnasto" className="text-slate-800 hover:text-[#379fdc] transition-colors">
+                  <Link href="/#hinnasto" className="text-slate-800 dark:text-slate-200 hover:text-[#379fdc] transition-colors font-medium">
                     Hinnasto
                   </Link>
                 </li>
                 <li>
-                  <Link href="/kertamaksut" className="text-slate-800 hover:text-[#379fdc] transition-colors">
+                  <Link href="/kertamaksut" className="text-slate-800 dark:text-slate-200 hover:text-[#379fdc] transition-colors font-medium">
                     Kertamaksut
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#yhteystiedot" className="text-slate-800 hover:text-[#379fdc] transition-colors">
+                  <Link href="/#yhteystiedot" className="text-slate-800 dark:text-slate-200 hover:text-[#379fdc] transition-colors font-medium">
                     Yhteystiedot
                   </Link>
                 </li>
