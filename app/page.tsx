@@ -1,10 +1,20 @@
-import { Clock, MapPin, Mail, Phone, Facebook, Instagram } from "lucide-react"
+import { Clock, MapPin, Mail, Phone, Facebook, Instagram, Info } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CopyButton } from "@/components/ui/copy-button"
-import scheduleData from "./schedule.json"
 import Link from "next/link"
+import { getScheduleWithFallback } from "@/lib/api"
 
-export default function Home() {
+// Define the types for our data
+interface Announcement {
+  title: string;
+  content: string;
+  validUntil: string | Date;
+}
+
+export default async function Home() {
+  // Fetch data from API with fallback to static data
+  const { schedule: scheduleData, prices, reservations, announcements } = await getScheduleWithFallback();
+  
   return (
     <>
       {/* Hero Section */}
@@ -66,6 +76,28 @@ export default function Home() {
           </div>
         </div>
       </section>
+      
+      {/* Announcements Section - Only shown if there are active announcements */}
+      {announcements && announcements.length > 0 && (
+        <section className="py-8 md:py-12 bg-blue-50">
+          <div className="container mx-auto px-4">
+            <h2 className="text-xl md:text-2xl font-bold text-center mb-8">Ajankohtaista</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+              {announcements.map((announcement: Announcement, index: number) => (
+                <div key={index} className="bg-white rounded-lg shadow-md p-6 border-l-4 border-l-[#379fdc]">
+                  <div className="flex items-start">
+                    <Info className="h-5 w-5 text-[#379fdc] mr-3 mt-1 flex-shrink-0" />
+                    <div>
+                      <h3 className="text-lg font-bold text-slate-800 mb-2">{announcement.title}</h3>
+                      <p className="text-slate-600">{announcement.content}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Harjoitusajat (Training Schedule) Section */}
       <section id="harjoitusajat" className="py-16 md:py-24 bg-white">
@@ -93,10 +125,35 @@ export default function Home() {
               </Card>
             ))}
           </div>
+          
           <p className="text-center mt-8 text-slate-600 max-w-2xl mx-auto">
             Huom! Aikatauluihin voi tulla muutoksia lomakausien ja juhlapyhien aikana. Tarkista ajankohtaiset tiedot
             sosiaalisen median kanavilta.
           </p>
+          
+          {reservations && reservations.length > 0 && (
+            <div className="mt-12 max-w-5xl mx-auto">
+              <h3 className="text-xl font-semibold text-center mb-6">Salin varaukset</h3>
+              <Card className="border-l-4 border-l-[#f59e0b] shadow-md">
+                <CardHeader>
+                  <CardTitle>Tulevat varaukset</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    {reservations.map((reservation, index) => (
+                      <li key={index} className="flex items-start">
+                        <Clock className="h-5 w-5 text-[#f59e0b] mr-2 mt-0.5" />
+                        <div>
+                          <span className="font-medium">{reservation.reserver}</span>
+                          <p className="text-slate-600">{reservation.time}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+          )}
         </div>
       </section>
 
@@ -179,89 +236,105 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">Hinnasto</h2>
           
-          {/* Adult pricing */}
-          <h3 className="text-xl font-semibold text-center mb-8">Harjoitusmaksut, Aikuiset</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16">
-            {/* Kertamaksu & 10-kortti */}
-            <Card className="border-t-4 border-t-[#379fdc] shadow-md hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle>Kertakäynnit</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-2xl font-bold text-[#379fdc] mb-1">9€</p>
-                    <p className="text-slate-600 font-medium">Kertamaksu</p>
-                    <p className="text-slate-600 text-sm">Yksittäinen harjoituskerta</p>
-                  </div>
-                  <div className="pt-2 border-t border-slate-200">
-                    <p className="text-2xl font-bold text-[#379fdc] mb-1">85€</p>
-                    <p className="text-slate-600 font-medium">10-kortti</p>
-                    <p className="text-slate-600 text-sm">Kymmenen harjoituskertaa, voimassa 3 kuukautta</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          {prices && prices.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {prices.map((priceItem, index) => (
+                <Card key={index} className="border-t-4 border-t-[#379fdc] shadow-md hover:shadow-lg transition-shadow">
+                  <CardContent className="pt-6">
+                    <p className="text-lg font-semibold text-slate-800 mb-2">{priceItem.name}</p>
+                    <p className="text-2xl font-bold text-[#379fdc]">{priceItem.price}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <>
+              {/* Adult pricing */}
+              <h3 className="text-xl font-semibold text-center mb-8">Harjoitusmaksut, Aikuiset</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16">
+                {/* Kertamaksu & 10-kortti */}
+                <Card className="border-t-4 border-t-[#379fdc] shadow-md hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle>Kertakäynnit</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div>
+                        <p className="text-lg font-semibold text-slate-800 mb-2">Kertamaksu</p>
+                        <p className="text-2xl font-bold text-[#379fdc]">9€</p>
+                        <p className="text-slate-600 text-sm mt-1">Yksittäinen harjoituskerta</p>
+                      </div>
+                      <div className="pt-2 border-t border-slate-200">
+                        <p className="text-lg font-semibold text-slate-800 mb-2">10-kortti</p>
+                        <p className="text-2xl font-bold text-[#379fdc]">85€</p>
+                        <p className="text-slate-600 text-sm mt-1">Kymmenen harjoituskertaa, voimassa 3 kuukautta</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
 
-            {/* Kausikortit */}
-            <Card className="border-t-4 border-t-[#379fdc] shadow-md hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle>Kausikortti</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-2xl font-bold text-[#379fdc] mb-1">190€</p>
-                    <p className="text-slate-600 font-medium">1 laji - kausi</p>
-                    <p className="text-slate-600 text-sm">Yhden lajin harjoitukset koko kauden ajan (kevät/syksy)</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                {/* Kausikortit */}
+                <Card className="border-t-4 border-t-[#379fdc] shadow-md hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle>Kausikortti</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div>
+                        <p className="text-lg font-semibold text-slate-800 mb-2">1 laji - kausi</p>
+                        <p className="text-2xl font-bold text-[#379fdc]">190€</p>
+                        <p className="text-slate-600 text-sm mt-1">Yhden lajin harjoitukset koko kauden ajan (kevät/syksy)</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
 
-            {/* Kaikki lajit */}
-            <Card className="border-t-4 border-t-[#379fdc] shadow-md hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle>Kaikki lajit</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-2xl font-bold text-[#379fdc] mb-1">290€</p>
-                    <p className="text-slate-600 font-medium">6 kuukautta</p>
-                    <p className="text-slate-600 text-sm">Kaikki harjoitukset 6 kuukauden ajan</p>
-                  </div>
-                  <div className="pt-2 border-t border-slate-200">
-                    <p className="text-2xl font-bold text-[#379fdc] mb-1">490€</p>
-                    <p className="text-slate-600 font-medium">12 kuukautta</p>
-                    <p className="text-slate-600 text-sm">Kaikki harjoitukset koko vuoden ajan</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-          
-          {/* Junior pricing */}
-          <h3 className="text-xl font-semibold text-center mb-8">Lapset ja Nuoret</h3>
-          <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-md mx-auto mb-16">
-            {/* Junior BJJ */}
-            <Card className="border-t-4 border-t-[#379fdc] shadow-md hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <CardTitle>Junnu BJJ (8-15v)</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-2xl font-bold text-[#379fdc] mb-4">150€</p>
-                <p className="text-slate-600">
-                  Treenit 2x viikossa, koko kauden ajan (kevät/syksy)
-                </p>
-                <div className="mt-4 pt-4 border-t border-slate-200">
-                  <Link href="/junnutoiminta" className="text-[#379fdc] hover:underline flex items-center">
-                    Lue lisää junnutoiminnasta →
-                  </Link>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+                {/* Kaikki lajit */}
+                <Card className="border-t-4 border-t-[#379fdc] shadow-md hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle>Kaikki lajit</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div>
+                        <p className="text-lg font-semibold text-slate-800 mb-2">6 kuukautta</p>
+                        <p className="text-2xl font-bold text-[#379fdc]">290€</p>
+                        <p className="text-slate-600 text-sm mt-1">Kaikki harjoitukset 6 kuukauden ajan</p>
+                      </div>
+                      <div className="pt-2 border-t border-slate-200">
+                        <p className="text-lg font-semibold text-slate-800 mb-2">12 kuukautta</p>
+                        <p className="text-2xl font-bold text-[#379fdc]">490€</p>
+                        <p className="text-slate-600 text-sm mt-1">Kaikki harjoitukset koko vuoden ajan</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+              
+              {/* Junior pricing */}
+              <h3 className="text-xl font-semibold text-center mb-8">Lapset ja Nuoret</h3>
+              <div className="grid grid-cols-1 md:grid-cols-1 gap-8 max-w-md mx-auto mb-16">
+                {/* Junior BJJ */}
+                <Card className="border-t-4 border-t-[#379fdc] shadow-md hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle>Junnu BJJ (8-15v)</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-lg font-semibold text-slate-800 mb-2">Junnu BJJ (8-15v)</p>
+                    <p className="text-2xl font-bold text-[#379fdc] mb-4">150€</p>
+                    <p className="text-slate-600">
+                      Treenit 2x viikossa, koko kauden ajan (kevät/syksy)
+                    </p>
+                    <div className="mt-4 pt-4 border-t border-slate-200">
+                      <Link href="/junnutoiminta" className="text-[#379fdc] hover:underline flex items-center">
+                        Lue lisää junnutoiminnasta →
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </>
+          )}
           
           <p className="text-center mt-8 mb-16 text-slate-600 max-w-2xl mx-auto">
             Hinnat ovat kausimaksuja (kevät/syksy). Kysy lisätietoja ajankohtaisista tarjouksista paikan päältä.
