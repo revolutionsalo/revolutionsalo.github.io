@@ -14,6 +14,9 @@ interface ScheduleDay {
 
 interface Price {
   name: string;
+  description: string;
+  customerGroup: string;
+  category: string;
   price: string;
 }
 
@@ -28,17 +31,22 @@ interface Announcement {
   validUntil: Date;
 }
 
+// Defining a type for Google Sheets data
+interface GoogleSheetsData {
+  values: string[][];
+}
+
 /**
  * Helper function to check if a value is empty (null, undefined, or empty string)
  */
-function isEmpty(value: any): boolean {
+function isEmpty(value: unknown): boolean {
   return value === null || value === undefined || (typeof value === 'string' && value.trim() === "");
 }
 
 /**
  * Transforms Google Sheets API response into schedule format needed by the app
  */
-export function transformGoogleSheetsData(data: any) {
+export function transformGoogleSheetsData(data: GoogleSheetsData) {
   const rows = data.values || [];
   
   // Schedule transformation
@@ -64,7 +72,7 @@ export function transformGoogleSheetsData(data: any) {
 /**
  * Transforms schedule data from Google Sheets format to app format
  */
-function transformSchedule(rows: any[]): ScheduleDay[] {
+function transformSchedule(rows: string[][]): ScheduleDay[] {
   // Find schedule rows (skip header row)
   const scheduleRows = rows.filter((row, index) => 
     index > 1 && 
@@ -100,10 +108,15 @@ function transformSchedule(rows: any[]): ScheduleDay[] {
 /**
  * Transforms price data from Google Sheets format
  */
-function transformPrices(rows: any[]): Price[] {
+function transformPrices(rows: string[][]): Price[] {
   // Find start of price section
   const priceHeaderIndex = rows.findIndex(row => 
-    row.length >= 2 && row[0] === "Tuotteen Nimi" && row[1] === "Hinta"
+    row.length >= 5 && 
+    row[0] === "Tuotteen Nimi" && 
+    row[1] === "Tuotteen kuvaus" &&
+    row[2] === "Asiakasryhmä" && 
+    row[3] === "Kategoria" && 
+    row[4] === "Hinta"
   );
   
   if (priceHeaderIndex === -1) {
@@ -116,14 +129,17 @@ function transformPrices(rows: any[]): Price[] {
   for (let i = priceHeaderIndex + 1; i < rows.length; i++) {
     const row = rows[i];
     
-    // Stop when we hit an empty row or less than 2 columns
-    if (!row || row.length < 2 || !row[0] || !row[1]) {
+    // Stop when we hit an empty row or insufficient columns
+    if (!row || row.length < 5 || !row[0] || !row[4]) {
       break;
     }
     
     prices.push({
       name: row[0],
-      price: row[1]
+      description: row[1] || "",
+      customerGroup: row[2] || "",
+      category: row[3] || "",
+      price: row[4]
     });
   }
   
@@ -133,7 +149,7 @@ function transformPrices(rows: any[]): Price[] {
 /**
  * Transforms reservation data from Google Sheets format
  */
-function transformReservations(rows: any[]): Reservation[] {
+function transformReservations(rows: string[][]): Reservation[] {
   // Find start of reservations section
   const reservationHeaderIndex = rows.findIndex(row => 
     row.length >= 3 && row[0] === "Varaaja" && row[1] === "Päivä" && row[2] === "Aloitus"
@@ -264,7 +280,7 @@ function transformReservations(rows: any[]): Reservation[] {
 /**
  * Transforms announcements data from Google Sheets format
  */
-function transformAnnouncements(rows: any[]): Announcement[] {
+function transformAnnouncements(rows: string[][]): Announcement[] {
   // Find start of announcements section
   const announcementHeaderIndex = rows.findIndex(row => 
     row.length >= 3 && 
