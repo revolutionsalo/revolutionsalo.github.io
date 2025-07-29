@@ -1,6 +1,3 @@
-import { Mail } from "lucide-react"
-import { CopyButton } from "@/components/ui/copy-button"
-
 export default function KalenteriPage() {
   return (
     <section className="py-16 md:py-24 bg-white">
