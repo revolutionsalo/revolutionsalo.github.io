@@ -61,7 +61,7 @@ export default function JunnutoimintaPage() {
             <div>
               <h3 className="text-xl font-semibold mb-3">Vanhemmat</h3>
               <p className="text-slate-600">
-                Vanhempien toivotaan odottavan yläkerrassa, jotta he eivät häiritse lastensa keskittymistä.
+                Vanhempien toivotaan odottavan harjoitustilan ulkopuolella, jotta he eivät häiritse lastensa keskittymistä.
               </p>
             </div>
 
@@ -82,7 +82,7 @@ export default function JunnutoimintaPage() {
             <div>
               <h3 className="text-xl font-semibold mb-3">Sosiaalitilat</h3>
               <p className="text-slate-600">
-                Pukuhuoneet, vessat ja suihkut löytyvät alakerrasta. Näytetään erikseen ensimmäisten treenien yhteydessä.
+                Pukuhuoneet, vessat ja suihkut löytyvät harjoittelutilan kanssa samasta kerroksesta. Näytetään erikseen ensimmäisten treenien yhteydessä.
               </p>
             </div>
 

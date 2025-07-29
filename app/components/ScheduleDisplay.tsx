@@ -3,6 +3,7 @@
 import { Clock } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useDynamicData } from './useDynamicData';
+import Link from 'next/link';
 
 export default function ScheduleDisplay() {
   const { data, isLoading, error } = useDynamicData();
@@ -55,6 +56,7 @@ export default function ScheduleDisplay() {
       <p className="text-center mt-8 text-slate-600 max-w-2xl mx-auto">
         Huom! Aikatauluihin voi tulla muutoksia lomakausien ja juhlapyhien
         aikana. Tarkista ajankohtaiset tiedot sosiaalisen median kanavilta.
+        Tulevat aikataulut löytyvät <Link className="text-blue-500" href="/kalenteri">kalenterinäkymästä</Link>.
       </p>
     </div>
   );
