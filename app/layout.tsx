@@ -1,11 +1,30 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import localFont from "next/font/local"
 import "./globals.css"
 import Image from "next/image"
 import Link from "next/link"
 import { Facebook, Instagram } from "lucide-react"
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = localFont({
+  src: [
+    {
+      path: './fonts/Inter-Regular.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './fonts/Inter-Medium.ttf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: './fonts/Inter-Bold.ttf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-inter',
+})
 
 export const metadata: Metadata = {
   title: "Revolution Fight",
