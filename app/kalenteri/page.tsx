@@ -119,12 +119,12 @@ export default function KalenteriPage() {
                     <div className="text-[8px] md:text-sm text-gray-600">17:00-18:00</div>
                   </td>
                   <td className="border border-gray-300 px-1 py-2 md:px-4 md:py-3"></td>
+                  <td className="border border-gray-300 px-1 py-2 md:px-4 md:py-3"></td>
+                  <td className="border border-gray-300 px-1 py-2 md:px-4 md:py-3"></td>
                   <td className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 bg-cyan-50">
                     <div className="font-semibold text-[8px] md:text-sm">Junnu BJJ 8 - 15V</div>
                     <div className="text-[8px] md:text-sm text-gray-600">17:00-18:00</div>
                   </td>
-                  <td className="border border-gray-300 px-1 py-2 md:px-4 md:py-3"></td>
-                  <td className="border border-gray-300 px-1 py-2 md:px-4 md:py-3"></td>
                   <td className="border border-gray-300 px-1 py-2 md:px-4 md:py-3"></td>
                   <td className="border border-gray-300 px-1 py-2 md:px-4 md:py-3"></td>
                 </tr>
