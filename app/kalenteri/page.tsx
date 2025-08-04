@@ -158,14 +158,14 @@ export default function KalenteriPage() {
                   <td className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 bg-purple-50">
                     <div className="font-semibold text-[8px] md:text-sm">BJJ & MMA Peruskurssi</div>
                     <div className="text-[8px] md:text-sm text-gray-600">19:30-20:30</div>
-                    <div className="text-[8px] md:text-xs text-gray-500 mt-1">1.9.-17.10.</div>
-                    <div className="text-[8px] md:text-xs text-gray-400">vko 36-42</div>
+                    <div className="text-[8px] md:text-xs text-gray-500 mt-1">1.9.-10.10..</div>
+                    <div className="text-[8px] md:text-xs text-gray-400">vko 36-41</div>
                   </td>
                   <td className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 bg-green-50">
                     <div className="font-semibold text-[8px] md:text-sm">Krav Maga Peruskurssi</div>
                     <div className="text-[8px] md:text-sm text-gray-600">19:30-20:30</div>
-                    <div className="text-[8px] md:text-xs text-gray-500 mt-1">2.9.-11.11.</div>
-                    <div className="text-[8px] md:text-xs text-gray-400">vko 36-46</div>
+                    <div className="text-[8px] md:text-xs text-gray-500 mt-1">2.9.-4.11.</div>
+                    <div className="text-[8px] md:text-xs text-gray-400">vko 36-45</div>
                   </td>
                   <td className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 bg-yellow-50">
                     <div className="font-semibold text-[8px] md:text-sm">Kunto potkunyrkkeily</div>
@@ -175,8 +175,8 @@ export default function KalenteriPage() {
                   <td className="border border-gray-300 px-1 py-2 md:px-4 md:py-3 bg-purple-50">
                     <div className="font-semibold text-[8px] md:text-sm">BJJ & MMA Peruskurssi</div>
                     <div className="text-[8px] md:text-sm text-gray-600">19:30-20:30</div>
-                    <div className="text-[8px] md:text-xs text-gray-500 mt-1">1.9.-17.10.</div>
-                    <div className="text-[8px] md:text-xs text-gray-400">vko 36-42</div>
+                    <div className="text-[8px] md:text-xs text-gray-500 mt-1">1.9.-10.10..</div>
+                    <div className="text-[8px] md:text-xs text-gray-400">vko 36-41</div>
                   </td>
                   <td className="border border-gray-300 px-1 py-2 md:px-4 md:py-3"></td>
                   <td className="border border-gray-300 px-1 py-2 md:px-4 md:py-3"></td>
