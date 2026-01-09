@@ -153,7 +153,7 @@ export default function KalenteriPage() {
             <div className="bg-green-50 border-l-4 border-green-500 p-4">
               <h4 className="font-semibold text-sm md:text-base mb-2">Krav Maga Peruskurssi</h4>
               <p className="text-xs md:text-sm text-gray-700 mb-2">
-                Peruskurssi järjestetään 17.1.-24.3. tiistaisin klo 19:30-20:30.
+                Peruskurssi järjestetään 17.1.-24.3. tiistaisin klo 19:30-20:30. Ensimmäinen harjoituskerta on lauantaina 17.1. klo 12:00.
               </p>
               <p className="text-xs md:text-sm text-gray-700 mb-2">
                 Hinta 80€ (hyvitetään kausimaksusta).
